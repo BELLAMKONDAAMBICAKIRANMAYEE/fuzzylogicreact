@@ -12,6 +12,8 @@ const StudentEvaluation = () => {
 
   // State to store the final evaluation
   const [finalEvaluation, setFinalEvaluation] = useState(null);
+  // State to store the final grade
+  const [finalGrade, setFinalGrade] = useState(null);
 
   // Function to handle form data changes
   const handleInputChange = (event) => {
@@ -35,6 +37,19 @@ const StudentEvaluation = () => {
 
     // Set the final evaluation based on the combined fuzzy grade
     setFinalEvaluation(combinedGrade);
+
+    // Map the final evaluation to a grade
+    const grade = getGrade(combinedGrade);
+    setFinalGrade(grade);
+  };
+
+  // Function to get the grade based on the final evaluation
+  const getGrade = (evaluation) => {
+    if (evaluation >= 90) return 'A';
+    else if (evaluation >= 80) return 'B';
+    else if (evaluation >= 70) return 'C';
+    else if (evaluation >= 60) return 'D';
+    else return 'F';
   };
 
   return (
@@ -81,6 +96,8 @@ const StudentEvaluation = () => {
         <div>
           <h2>Final Evaluation:</h2>
           <p>{finalEvaluation}</p>
+          <h2>Final Grade:</h2>
+          <p>{finalGrade}</p>
         </div>
       )}
     </div>
